@@ -1,25 +1,37 @@
 <?php
 
 abstract class Animal{
-    private $name;
+    protected $nombre;
 
-    public function __construct($name){
-        $this -> name = $name;
-    }
-}
-
-class Dog extends Animal{
-    public function bark(){
-        return "Woof!";
+    public function __construct($nombre){
+        $this -> nombre = $nombre;
     }
 
+    public function getNombre() {
+        return $this->nombre;
+}
+    abstract public function sonido();
+
+}
+class Perro extends Animal{
+    public function sonido(){
+        return "Guau!";
+    }
+
 }
 
-class Cat extends Animal{
-    public function meow(){
+class Gato extends Animal{
+    public function sonido(){
         return "Meow!";
     }
 
 }
 
+$nombrePerro = readline("Introduce el nombre del perro: ");
+$nombreGato = readline("Introduce el nombre del gato: ");
+
+$animales = [new Perro ($nombrePerro), new Gato ($nombreGato)];
+foreach($animales as $animal){
+    echo $animal -> getNombre() . " dice: " . $animal -> sonido() . "\n";
+}
 ?>
